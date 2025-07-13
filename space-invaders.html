@@ -153,37 +153,49 @@
             });
         }
 
+        let invaderDirection = 1;
+        let invaderMoveCounter = 0;
+
         function updateInvaders() {
-            let moveDown = false;
-            let direction = 1;
+            invaderMoveCounter++;
+            
+            if (invaderMoveCounter % 30 !== 0) return;
+            
+            let hitEdge = false;
             
             invaders.forEach(invader => {
                 if (invader.alive) {
-                    if (invader.x <= 0 || invader.x >= canvas.width - invader.width) {
-                        moveDown = true;
+                    if ((invader.x <= 0 && invaderDirection < 0) || 
+                        (invader.x >= canvas.width - invader.width && invaderDirection > 0)) {
+                        hitEdge = true;
                     }
                 }
             });
             
-            invaders.forEach(invader => {
-                if (invader.alive) {
-                    if (moveDown) {
+            if (hitEdge) {
+                invaders.forEach(invader => {
+                    if (invader.alive) {
                         invader.y += 20;
-                    } else {
-                        invader.x += direction;
                     }
-                    
-                    if (Math.random() < 0.001) {
-                        invaderBullets.push({
-                            x: invader.x + invader.width / 2,
-                            y: invader.y + invader.height,
-                            width: 3,
-                            height: 10,
-                            speed: 3
-                        });
+                });
+                invaderDirection *= -1;
+            } else {
+                invaders.forEach(invader => {
+                    if (invader.alive) {
+                        invader.x += invaderDirection * 10;
+                        
+                        if (Math.random() < 0.001) {
+                            invaderBullets.push({
+                                x: invader.x + invader.width / 2,
+                                y: invader.y + invader.height,
+                                width: 3,
+                                height: 10,
+                                speed: 3
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
         function checkCollisions() {

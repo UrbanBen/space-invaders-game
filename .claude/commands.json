@@ -1,0 +1,17 @@
+{
+  "commands": [
+    {
+      "name": "ask-david",
+      "description": "Generate an email draft for David based on current codebase context and outstanding questions",
+      "prompt_file": "commands/ask-david.txt",
+      "usage": "/ask-david",
+      "category": "communication",
+      "examples": [
+        {
+          "input": "/ask-david",
+          "description": "Generate email draft with current project status and questions for David"
+        }
+      ]
+    }
+  ]
+}

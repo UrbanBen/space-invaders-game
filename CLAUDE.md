@@ -59,3 +59,33 @@ The game is deployed via GitHub Pages at: https://urbanben.github.io/space-invad
 - `index.html` - Main game file (auto-served by GitHub Pages)
 - `README.md` - Repository documentation with live demo link
 - `CLAUDE.md` - Development guidelines (this file)
+
+## Custom Slash Commands
+
+### `/ask-david`
+**Purpose:** Generate an email draft for David based on current project context and outstanding questions.
+
+**Usage:** Simply type `/ask-david` in Claude Code to generate a professional email draft.
+
+**What it does:**
+- Analyzes current codebase state and recent changes
+- Reviews conversation history for context and open questions
+- Identifies areas needing input, approval, or clarification
+- Generates a structured email with subject line and body
+- Includes project status, accomplishments, questions, and next steps
+
+**Output Format:**
+- Clear subject line
+- Professional email body with context
+- Specific questions or decision points
+- Suggested next steps
+- Ready to copy/paste and send
+
+**Use Cases:**
+- Project status updates requiring feedback
+- Technical decisions needing approval or input
+- Clarification on requirements or priorities
+- Resource or timeline discussions
+- Milestone updates and strategic direction questions
+
+The command files are located in `.claude/commands/` and configured via `.claude/commands.json`.

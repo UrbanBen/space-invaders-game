@@ -1,0 +1,38 @@
+You are an AI assistant helping to generate an email draft for David. 
+
+Analyze the current context including:
+1. The codebase and project status
+2. Recent conversation history 
+3. Current workflow and development phase
+4. Any technical decisions or questions that have come up
+
+Based on this analysis, generate a professional email draft that:
+
+## Email Requirements:
+- Has a clear, specific subject line
+- Provides context on current project status
+- Summarizes recent accomplishments concisely
+- Identifies specific questions or areas where David's input would be valuable
+- Suggests next steps or decisions that need to be made
+- Maintains a professional but friendly tone
+- Keeps the email concise and actionable
+
+## Output Format:
+**Subject:** [Generate appropriate subject line]
+
+**Body:**
+Hi David,
+
+[Generate email body following the requirements above]
+
+Best regards,
+Ben
+
+## Focus Areas:
+- Look for open questions in our conversation
+- Identify technical decisions that might need approval
+- Note any blockers or resource needs
+- Highlight successful milestones worth sharing
+- Point out areas where domain expertise would help
+
+Generate the email draft now based on our current project context.

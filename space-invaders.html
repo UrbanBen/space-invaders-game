@@ -8,51 +8,372 @@
         body {
             margin: 0;
             padding: 0;
-            background: #000;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Courier New', monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
+            overflow: hidden;
         }
         
+        /* Settings Panel Styles */
+        .settings-panel {
+            position: fixed;
+            left: -350px;
+            top: 0;
+            width: 320px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1e1e2e, #2a2a4a);
+            border-right: 2px solid #00d4ff;
+            box-shadow: 5px 0 20px rgba(0, 212, 255, 0.3);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #00d4ff #2a2a4a;
+        }
+        
+        .settings-panel.open {
+            left: 0;
+        }
+        
+        .settings-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .settings-panel::-webkit-scrollbar-track {
+            background: #2a2a4a;
+        }
+        
+        .settings-panel::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 4px;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #16213e;
+            border-bottom: 1px solid #00d4ff;
+        }
+        
+        .settings-header h3 {
+            margin: 0;
+            color: #00d4ff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .toggle-btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+        
+        .settings-content {
+            padding: 20px;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+        }
+        
+        .settings-section h4 {
+            color: #00d4ff;
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            border-bottom: 1px solid #3a3a5a;
+            padding-bottom: 8px;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        
+        .control-group label {
+            flex: 1;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+        
+        .slider {
+            flex: 2;
+            height: 6px;
+            background: #3a3a5a;
+            outline: none;
+            border-radius: 3px;
+            appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #00d4ff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #00d4ff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 212, 255, 0.3);
+        }
+        
+        .value {
+            min-width: 35px;
+            text-align: center;
+            font-size: 12px;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        
+        .number-input {
+            flex: 1;
+            background: #3a3a5a;
+            border: 1px solid #5a5a7a;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            max-width: 80px;
+        }
+        
+        .number-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+        }
+        
+        .color-input {
+            flex: 1;
+            background: #3a3a5a;
+            border: 1px solid #5a5a7a;
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            max-width: 60px;
+            height: 35px;
+        }
+        
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .preset-btn {
+            background: linear-gradient(145deg, #4a4a6a, #3a3a5a);
+            border: 1px solid #00d4ff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .preset-btn:hover {
+            background: linear-gradient(145deg, #00d4ff, #0099cc);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Game Container Styles */
         #gameContainer {
             text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            background: rgba(30, 30, 46, 0.8);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid #00d4ff;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .game-header > div {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00d4ff;
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
         }
         
         canvas {
-            border: 2px solid #fff;
+            border: 2px solid #00d4ff;
             background: #000;
-        }
-        
-        #score {
-            font-size: 24px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
         
         #gameOver {
             font-size: 36px;
-            color: #ff0000;
+            color: #ff6b6b;
             margin-top: 20px;
             display: none;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
         #instructions {
             margin-top: 20px;
             font-size: 14px;
-            color: #ccc;
+            color: #a0a0a0;
+            background: rgba(30, 30, 46, 0.6);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid #3a3a5a;
+        }
+        
+        .settings-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(145deg, #00d4ff, #0099cc);
+            border: none;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+            z-index: 999;
+        }
+        
+        .settings-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
         }
     </style>
 </head>
 <body>
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-header">
+            <h3>Game Settings</h3>
+            <button id="toggleSettings" class="toggle-btn">×</button>
+        </div>
+        
+        <div class="settings-content">
+            <div class="settings-section">
+                <h4>Game Mechanics</h4>
+                <div class="control-group">
+                    <label for="playerSpeed">Player Speed</label>
+                    <input type="range" id="playerSpeed" min="1" max="10" value="5" class="slider">
+                    <span class="value" id="playerSpeedValue">5</span>
+                </div>
+                <div class="control-group">
+                    <label for="bulletSpeed">Bullet Speed</label>
+                    <input type="range" id="bulletSpeed" min="3" max="15" value="7" class="slider">
+                    <span class="value" id="bulletSpeedValue">7</span>
+                </div>
+                <div class="control-group">
+                    <label for="invaderSpeed">Invader Speed</label>
+                    <input type="range" id="invaderSpeed" min="10" max="60" value="30" class="slider">
+                    <span class="value" id="invaderSpeedValue">30</span>
+                </div>
+                <div class="control-group">
+                    <label for="invaderFireRate">Invader Fire Rate</label>
+                    <input type="range" id="invaderFireRate" min="1" max="50" value="10" class="slider">
+                    <span class="value" id="invaderFireRateValue">0.001</span>
+                </div>
+                <div class="control-group">
+                    <label for="lives">Lives</label>
+                    <input type="number" id="lives" min="1" max="5" value="3" class="number-input">
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Visual Settings</h4>
+                <div class="control-group">
+                    <label for="playerColor">Player Color</label>
+                    <input type="color" id="playerColor" value="#00ff00" class="color-input">
+                </div>
+                <div class="control-group">
+                    <label for="invaderColor">Invader Color</label>
+                    <input type="color" id="invaderColor" value="#ff0000" class="color-input">
+                </div>
+                <div class="control-group">
+                    <label for="bulletColor">Bullet Color</label>
+                    <input type="color" id="bulletColor" value="#ffff00" class="color-input">
+                </div>
+                <div class="control-group">
+                    <label for="backgroundColor">Background Color</label>
+                    <input type="color" id="backgroundColor" value="#000000" class="color-input">
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Game Setup</h4>
+                <div class="control-group">
+                    <label for="invaderRows">Invader Rows</label>
+                    <input type="number" id="invaderRows" min="3" max="8" value="5" class="number-input">
+                </div>
+                <div class="control-group">
+                    <label for="invaderCols">Invader Columns</label>
+                    <input type="number" id="invaderCols" min="5" max="15" value="10" class="number-input">
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4>Presets</h4>
+                <div class="preset-buttons">
+                    <button id="easyPreset" class="preset-btn">Easy</button>
+                    <button id="mediumPreset" class="preset-btn">Medium</button>
+                    <button id="hardPreset" class="preset-btn">Hard</button>
+                    <button id="resetDefaults" class="preset-btn">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="gameContainer">
-        <div id="score">Score: 0</div>
+        <div class="game-header">
+            <div id="score">Score: 0</div>
+            <div id="lives">Lives: 3</div>
+            <div id="wave">Wave: 1</div>
+            <div id="highScore">High Score: 0</div>
+        </div>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div id="gameOver">GAME OVER<br>Press R to Restart</div>
         <div id="instructions">
-            Use ARROW KEYS to move • SPACEBAR to shoot • R to restart
+            Use ARROW KEYS to move • SPACEBAR to shoot • R to restart • S for settings
         </div>
+        <button id="settingsToggle" class="settings-toggle">⚙️ Settings</button>
     </div>
 
     <script>
@@ -60,8 +381,29 @@
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
         const gameOverElement = document.getElementById('gameOver');
+        const livesElement = document.getElementById('lives');
+        const waveElement = document.getElementById('wave');
+        const highScoreElement = document.getElementById('highScore');
+
+        // Game Configuration
+        let gameConfig = {
+            playerSpeed: 5,
+            bulletSpeed: 7,
+            invaderSpeed: 30,
+            invaderFireRate: 0.001,
+            lives: 3,
+            playerColor: '#00ff00',
+            invaderColor: '#ff0000',
+            bulletColor: '#ffff00',
+            backgroundColor: '#000000',
+            invaderRows: 5,
+            invaderCols: 10
+        };
 
         let score = 0;
+        let lives = gameConfig.lives;
+        let wave = 1;
+        let highScore = parseInt(localStorage.getItem('spaceInvadersHighScore')) || 0;
         let gameRunning = true;
         let keys = {};
 
@@ -70,8 +412,140 @@
             y: canvas.height - 60,
             width: 50,
             height: 30,
-            speed: 5
+            speed: gameConfig.playerSpeed
         };
+
+        // Settings Panel Functionality
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsToggle = document.getElementById('settingsToggle');
+        const toggleSettings = document.getElementById('toggleSettings');
+
+        function initializeSettings() {
+            // Update UI elements
+            updateUI();
+            
+            // Settings panel toggle
+            settingsToggle.addEventListener('click', () => {
+                settingsPanel.classList.toggle('open');
+            });
+            
+            toggleSettings.addEventListener('click', () => {
+                settingsPanel.classList.remove('open');
+            });
+
+            // Slider updates
+            const sliders = ['playerSpeed', 'bulletSpeed', 'invaderSpeed', 'invaderFireRate'];
+            sliders.forEach(setting => {
+                const slider = document.getElementById(setting);
+                const valueDisplay = document.getElementById(setting + 'Value');
+                
+                slider.addEventListener('input', (e) => {
+                    let value = parseInt(e.target.value);
+                    if (setting === 'invaderFireRate') {
+                        value = value / 10000; // Convert to decimal
+                        valueDisplay.textContent = value.toFixed(4);
+                    } else {
+                        valueDisplay.textContent = value;
+                    }
+                    gameConfig[setting] = value;
+                    updateGameFromConfig();
+                });
+            });
+
+            // Color inputs
+            const colorInputs = ['playerColor', 'invaderColor', 'bulletColor', 'backgroundColor'];
+            colorInputs.forEach(setting => {
+                const input = document.getElementById(setting);
+                input.addEventListener('change', (e) => {
+                    gameConfig[setting] = e.target.value;
+                    if (setting === 'backgroundColor') {
+                        canvas.style.background = e.target.value;
+                    }
+                });
+            });
+
+            // Number inputs
+            const numberInputs = ['lives', 'invaderRows', 'invaderCols'];
+            numberInputs.forEach(setting => {
+                const input = document.getElementById(setting);
+                input.addEventListener('change', (e) => {
+                    gameConfig[setting] = parseInt(e.target.value);
+                    if (setting === 'lives') {
+                        lives = gameConfig.lives;
+                        updateUI();
+                    }
+                    if (setting === 'invaderRows' || setting === 'invaderCols') {
+                        createInvaders();
+                    }
+                });
+            });
+
+            // Preset buttons
+            document.getElementById('easyPreset').addEventListener('click', () => setPreset('easy'));
+            document.getElementById('mediumPreset').addEventListener('click', () => setPreset('medium'));
+            document.getElementById('hardPreset').addEventListener('click', () => setPreset('hard'));
+            document.getElementById('resetDefaults').addEventListener('click', () => setPreset('default'));
+        }
+
+        function updateGameFromConfig() {
+            player.speed = gameConfig.playerSpeed;
+        }
+
+        function updateUI() {
+            scoreElement.textContent = `Score: ${score}`;
+            livesElement.textContent = `Lives: ${lives}`;
+            waveElement.textContent = `Wave: ${wave}`;
+            highScoreElement.textContent = `High Score: ${highScore}`;
+        }
+
+        function setPreset(preset) {
+            const presets = {
+                easy: {
+                    playerSpeed: 7, bulletSpeed: 10, invaderSpeed: 45, invaderFireRate: 0.0005,
+                    lives: 5, invaderRows: 3, invaderCols: 8
+                },
+                medium: {
+                    playerSpeed: 5, bulletSpeed: 7, invaderSpeed: 30, invaderFireRate: 0.001,
+                    lives: 3, invaderRows: 5, invaderCols: 10
+                },
+                hard: {
+                    playerSpeed: 3, bulletSpeed: 5, invaderSpeed: 20, invaderFireRate: 0.002,
+                    lives: 1, invaderRows: 6, invaderCols: 12
+                },
+                default: {
+                    playerSpeed: 5, bulletSpeed: 7, invaderSpeed: 30, invaderFireRate: 0.001,
+                    lives: 3, playerColor: '#00ff00', invaderColor: '#ff0000',
+                    bulletColor: '#ffff00', backgroundColor: '#000000',
+                    invaderRows: 5, invaderCols: 10
+                }
+            };
+
+            Object.assign(gameConfig, presets[preset]);
+            
+            // Update all UI controls
+            Object.keys(gameConfig).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'range') {
+                        if (key === 'invaderFireRate') {
+                            element.value = gameConfig[key] * 10000;
+                            document.getElementById(key + 'Value').textContent = gameConfig[key].toFixed(4);
+                        } else {
+                            element.value = gameConfig[key];
+                            document.getElementById(key + 'Value').textContent = gameConfig[key];
+                        }
+                    } else {
+                        element.value = gameConfig[key];
+                    }
+                }
+            });
+
+            lives = gameConfig.lives;
+            canvas.style.background = gameConfig.backgroundColor;
+            updateGameFromConfig();
+            updateUI();
+            createInvaders();
+        }
 
         let bullets = [];
         let invaders = [];
@@ -79,10 +553,11 @@
 
         function createInvaders() {
             invaders = [];
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col < 10; col++) {
+            const spacing = Math.min(70, (canvas.width - 100) / gameConfig.invaderCols);
+            for (let row = 0; row < gameConfig.invaderRows; row++) {
+                for (let col = 0; col < gameConfig.invaderCols; col++) {
                     invaders.push({
-                        x: col * 70 + 50,
+                        x: col * spacing + 50,
                         y: row * 50 + 50,
                         width: 40,
                         height: 30,
@@ -93,7 +568,7 @@
         }
 
         function drawPlayer() {
-            ctx.fillStyle = '#00ff00';
+            ctx.fillStyle = gameConfig.playerColor;
             ctx.fillRect(player.x, player.y, player.width, player.height);
             
             ctx.fillStyle = '#ffffff';
@@ -103,7 +578,7 @@
         }
 
         function drawInvaders() {
-            ctx.fillStyle = '#ff0000';
+            ctx.fillStyle = gameConfig.invaderColor;
             invaders.forEach(invader => {
                 if (invader.alive) {
                     ctx.fillRect(invader.x, invader.y, invader.width, invader.height);
@@ -112,16 +587,16 @@
                     ctx.fillRect(invader.x + 8, invader.y + 5, 6, 6);
                     ctx.fillRect(invader.x + 26, invader.y + 5, 6, 6);
                     
-                    ctx.fillStyle = '#ff0000';
+                    ctx.fillStyle = gameConfig.invaderColor;
                     ctx.fillRect(invader.x + 15, invader.y + 15, 10, 8);
                     
-                    ctx.fillStyle = '#ff0000';
+                    ctx.fillStyle = gameConfig.invaderColor;
                 }
             });
         }
 
         function drawBullets() {
-            ctx.fillStyle = '#ffff00';
+            ctx.fillStyle = gameConfig.bulletColor;
             bullets.forEach(bullet => {
                 ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
             });
@@ -143,7 +618,7 @@
 
         function updateBullets() {
             bullets = bullets.filter(bullet => {
-                bullet.y -= bullet.speed;
+                bullet.y -= gameConfig.bulletSpeed;
                 return bullet.y > 0;
             });
             
@@ -159,7 +634,7 @@
         function updateInvaders() {
             invaderMoveCounter++;
             
-            if (invaderMoveCounter % 30 !== 0) return;
+            if (invaderMoveCounter % gameConfig.invaderSpeed !== 0) return;
             
             let hitEdge = false;
             
@@ -184,7 +659,7 @@
                     if (invader.alive) {
                         invader.x += invaderDirection * 10;
                         
-                        if (Math.random() < 0.001) {
+                        if (Math.random() < gameConfig.invaderFireRate) {
                             invaderBullets.push({
                                 x: invader.x + invader.width / 2,
                                 y: invader.y + invader.height,
@@ -221,7 +696,15 @@
                     bullet.y < player.y + player.height &&
                     bullet.y + bullet.height > player.y) {
                     
-                    gameOver();
+                    invaderBullets.splice(bulletIndex, 1);
+                    lives--;
+                    updateUI();
+                    if (lives <= 0) {
+                        gameOver();
+                    } else {
+                        // Reset player position
+                        player.x = canvas.width / 2 - 25;
+                    }
                 }
             });
             
@@ -235,13 +718,28 @@
         function gameOver() {
             gameRunning = false;
             gameOverElement.style.display = 'block';
+            
+            // Update high score
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('spaceInvadersHighScore', highScore);
+                updateUI();
+            }
         }
 
         function checkWin() {
             if (invaders.every(invader => !invader.alive)) {
                 score += 100;
-                scoreElement.textContent = `Score: ${score}`;
+                wave++;
+                updateUI();
                 createInvaders();
+                // Increase difficulty slightly
+                if (gameConfig.invaderSpeed > 15) {
+                    gameConfig.invaderSpeed -= 2;
+                }
+                if (gameConfig.invaderFireRate < 0.005) {
+                    gameConfig.invaderFireRate += 0.0002;
+                }
             }
         }
 
@@ -265,12 +763,16 @@
 
         function resetGame() {
             score = 0;
+            lives = gameConfig.lives;
+            wave = 1;
             gameRunning = true;
             bullets = [];
             invaderBullets = [];
+            invaderDirection = 1;
+            invaderMoveCounter = 0;
             player.x = canvas.width / 2 - 25;
             player.y = canvas.height - 60;
-            scoreElement.textContent = `Score: ${score}`;
+            updateUI();
             gameOverElement.style.display = 'none';
             createInvaders();
             gameLoop();
@@ -286,12 +788,16 @@
                     y: player.y,
                     width: 4,
                     height: 10,
-                    speed: 7
+                    speed: gameConfig.bulletSpeed
                 });
             }
             
             if (e.code === 'KeyR') {
                 resetGame();
+            }
+            
+            if (e.code === 'KeyS') {
+                settingsPanel.classList.toggle('open');
             }
         });
 
@@ -299,6 +805,9 @@
             keys[e.code] = false;
         });
 
+        // Initialize the game
+        initializeSettings();
+        updateUI();
         createInvaders();
         gameLoop();
     </script>

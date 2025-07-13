@@ -89,3 +89,40 @@ The game is deployed via GitHub Pages at: https://urbanben.github.io/space-invad
 - Milestone updates and strategic direction questions
 
 The command files are located in `.claude/commands/` and configured via `.claude/commands.json`.
+
+## MCP Email Server Setup
+
+### Gmail MCP Server
+A Gmail SMTP server has been installed to enable email sending directly from Claude Code.
+
+**Location:** `/Users/ben/Claude/mcp-email-server/`
+
+**Features:**
+- Send emails via Gmail SMTP with TLS encryption
+- Support for attachments (file path, URL download, pre-staged)
+- HTML and plain text email support
+- Secure App Password authentication
+
+**Setup Required:**
+1. Generate Gmail App Password (requires 2-Step Verification)
+2. Create `.env` file with credentials in `mcp-email-server/gmail-mcp-server/`
+3. Configure Claude Desktop with provided `claude_desktop_config.json`
+4. Restart Claude Desktop
+
+**Usage Examples:**
+- "Send an email to david@example.com with subject 'Project Update' and the content from our /ask-david command"
+- "Email the Space Invaders game link to someone"
+- "Send a status update email with attachment"
+
+**Configuration Files:**
+- `mcp-email-server/gmail-mcp-server/.env` - Your Gmail credentials (create this)
+- `mcp-email-server/claude_desktop_config.json` - MCP server configuration
+- `mcp-email-server/SETUP_GUIDE.md` - Complete setup instructions
+
+**Security:**
+- Uses Gmail App Passwords (not main password)
+- Runs locally on your machine
+- Credentials stored only in local `.env` file
+- TLS encryption for all email transmission
+
+After setup, you can combine `/ask-david` with email sending: generate the email draft, then send it directly through Claude Code.

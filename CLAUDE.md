@@ -44,3 +44,18 @@ Always commit meaningful changes to maintain clean git history:
 - Add features with clear descriptions of functionality added
 - Include context about why changes were made, not just what changed
 - Commit frequently as work progresses rather than in large batches
+
+## Deployment
+
+The game is deployed via GitHub Pages at: https://urbanben.github.io/space-invaders-game/
+
+**Deployment Process:**
+1. All changes to `index.html` automatically deploy when pushed to main branch
+2. GitHub Pages serves the file directly with no build process required
+3. Changes typically take 1-2 minutes to appear live after push
+4. The game requires no server-side processing and runs entirely in the browser
+
+**File Structure for GitHub Pages:**
+- `index.html` - Main game file (auto-served by GitHub Pages)
+- `README.md` - Repository documentation with live demo link
+- `CLAUDE.md` - Development guidelines (this file)

@@ -1,35 +1,68 @@
 # Space Invaders Game
 
-A classic Space Invaders game implemented in a single HTML file that runs directly in any modern web browser.
+🚀 **[Play Online Now!](https://urbanben.github.io/space-invaders-game/)** 🚀
 
-## Files
+A fully customizable Space Invaders game with modern UI and comprehensive settings panel. Built as a single HTML file with no external dependencies.
 
-- `space-invaders.html` - Complete Space Invaders game with HTML, CSS, and JavaScript
+## ✨ Key Features
 
-## How to Play
+### 🎮 **Comprehensive Customization System**
+- **Settings Panel**: Sliding panel with modern gradient design and smooth animations
+- **Real-time Controls**: Adjust gameplay without restarting
+- **Difficulty Presets**: Easy, Medium, Hard, and Reset options
+- **Visual Customization**: Color pickers for all game elements
 
-1. Open `space-invaders.html` in Safari (or any modern web browser)
-2. Use arrow keys to move your spaceship left and right
-3. Press spacebar to shoot at the invaders
-4. Destroy all invaders to advance to the next wave
-5. Avoid getting hit by invader bullets or letting invaders reach your position
-6. Press 'R' to restart the game at any time
+### ⚙️ **Customizable Game Mechanics**
+- Player movement speed (1-10)
+- Bullet velocity (3-15)
+- Invader movement timing (10-60 frames)
+- Enemy fire rate (0.0001-0.005)
+- Starting lives (1-5)
+- Invader grid size (3-8 rows, 5-15 columns)
 
-## Game Features
+### 🎨 **Modern UI Design**
+- Lives counter with collision handling
+- Wave progression system
+- Persistent high score tracking
+- Glassmorphism design with cyan accents
+- Smooth hover animations and glowing effects
 
-- Player spaceship with smooth movement controls
-- Grid of enemy invaders that move and shoot back
-- Collision detection for bullets and enemies
-- Score tracking (10 points per invader, 100 bonus per wave)
-- Game over and restart functionality
-- Progressive difficulty as new waves spawn
+### 🎯 **Enhanced Gameplay**
+- Lives system with player respawn
+- Progressive difficulty scaling
+- Wave-based advancement
+- Multiple collision types
+- Keyboard shortcuts (S for settings, R for restart)
 
-## Technical Details
+## 🎮 How to Play
 
-The game is built using:
-- HTML5 Canvas for rendering
-- Vanilla JavaScript for game logic
-- CSS for styling and layout
-- No external dependencies required
+**Controls:**
+- **Arrow Keys**: Move spaceship
+- **Spacebar**: Shoot bullets
+- **S Key**: Toggle settings panel
+- **R Key**: Restart game
 
-Simply double-click the HTML file or open it through Safari's File menu to start playing immediately.
+**Objective:**
+- Destroy all invaders to advance waves
+- Avoid enemy bullets and collisions
+- Survive as long as possible for high scores
+
+## 🛠️ Technical Implementation
+
+- **HTML5 Canvas**: Hardware-accelerated 2D rendering
+- **Vanilla JavaScript**: Pure JS with no frameworks
+- **Modern CSS**: Gradients, animations, and responsive design
+- **Local Storage**: Persistent high score tracking
+- **GitHub Pages**: Live deployment at [urbanben.github.io/space-invaders-game](https://urbanben.github.io/space-invaders-game/)
+
+## 📁 Files
+
+- `index.html` - Complete game with HTML, CSS, and JavaScript
+- `README.md` - This documentation
+- `CLAUDE.md` - Development guidelines for Claude Code
+
+## 🚀 Live Demo
+
+Experience the game instantly: **[https://urbanben.github.io/space-invaders-game/](https://urbanben.github.io/space-invaders-game/)**
+
+No installation required - runs directly in any modern web browser!
